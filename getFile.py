@@ -26,7 +26,7 @@ def getRecentFile(path):
     list = getFile(path)
     list.sort(key=lambda fn: os.path.getmtime(path + fn) if not os.path.isdir(path + fn) else 0)
     # 获取文件时间
-    d = datetime.datetime.fromtimestamp(os.path.getmtime(path + list[-1]))
+    d = os.path.getmtime(path + list[-1])
     print('最后改动的文件是' + list[-1] + "，时间：" + d.strftime("%Y-%m-%d %H-%M-%S"))
 
 
