@@ -26,7 +26,7 @@ def getFile(path):
 def getRecentFile(path):
     list = getFile(path)
     dir_list = sorted(list, key=lambda list: os.path.getmtime(list))
-    return os.path.getmtime(list[-1]), list[-1]
+    return os.path.getmtime(list[1]), list[1]
 
 
 def rmFile(path):
@@ -34,7 +34,7 @@ def rmFile(path):
     recent_time, recent_file = getRecentFile(path)
     print(recent_file, datetime.datetime.fromtimestamp(int(recent_time)).strftime("%Y-%m-%d %H:%M:%S"))
     for i in list:
-        if os.path.getmtime(list[list.index(i)]) - recent_time > time:
+        if recent_time - os.path.getmtime(list[list.index(i)]) > time:
             print("result", list[list.index(i)],
                   datetime.datetime.fromtimestamp(int(os.path.getmtime(list[list.index(i)]))).strftime(
                       "%Y-%m-%d %H:%M:%S"))
