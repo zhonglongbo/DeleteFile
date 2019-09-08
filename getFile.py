@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import time
 from datetime import datetime, timedelta
 
 
 def getArgs():
-    for i in range(1, len(sys.argv)):
-        print('参数 %s: %s' % (i, sys.argv[i]))
-    return str(sys.argv)
+    if len(sys.argv) < 3:
+        raise Exception("参数格式错误", "path time")
+    return sys.argv
 
 
 path = getArgs()[1]
+time = float(int(getArgs()[2]) * 24 * 3600)
 
 
 def getFile(path):
-    print(path)
     list = []
     for fpathe, dirs, fs in os.walk(path):
         for f in fs:
@@ -24,20 +25,19 @@ def getFile(path):
 
 def getRecentFile(path):
     list = getFile(path)
-    list.sort(key=lambda fn: os.path.getmtime(path + fn) if not os.path.isdir(path + fn) else 0)
-    # 获取文件时间
-    print(list[-1],os.path.getmtime(list[-1]))
-    d = os.path.getmtime(list[-1])
-    print('最后改动的文件是' + list[-1] + "，时间：" + d.strftime("%Y-%m-%d %H-%M-%S"))
+    dir_list = sorted(list, key=lambda list: os.path.getmtime(list))
+    return os.path.getmtime(list[-1])
 
 
 def rmFile(path):
     list = getFile(path)
+    print(list)
     recent_time = getRecentFile(path)
+    print(recent_time)
     for i in list:
-        if os.path.getmtime(list.index(i)) - recent_time > timedelta(days=30):
-            print list.index(i), os.path.getmtime(list.index(i))
+        if os.path.getmtime(list[list.index(i)]) - recent_time > time:
+            print("result", list.index(i), os.path.getmtime(list.index(i)))
+
 
 if __name__ == '__main__':
-    getArgs()
     rmFile(path)
