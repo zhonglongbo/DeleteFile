@@ -14,8 +14,9 @@ path = getArgs()[1]
 
 
 def getFile(path):
+    print(path)
     list = []
-    for fpathe, dirs, fs in os.walk('/root'):
+    for fpathe, dirs, fs in os.walk(path):
         for f in fs:
             list.append(os.path.join(fpathe, f))
     return list
