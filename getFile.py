@@ -22,7 +22,7 @@ def getFile(path):
 
 
 def getRecentFile(path):
-    list = os.listdir(path)
+    list = os.getFile(path)
     list.sort(key=lambda fn: os.path.getmtime(path + fn) if not os.path.isdir(path + fn) else 0)
     # 获取文件时间
     d = datetime.datetime.fromtimestamp(os.path.getmtime(path + list[-1]))
