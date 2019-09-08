@@ -36,6 +36,6 @@ def rmFile(path):
     print(datetime.datetime.fromtimestamp(int(recent_time)).strftime("%Y-%m-%d %H:%M:%S"))
     for i in list:
         if os.path.getmtime(list[list.index(i)]) - recent_time > time:
-            print("result", list[list.index(i)], datetime.datetime.fromtimestamp(int(os.path.getmtime(list[list.index(i)])).strftime("%Y-%m-%d %H:%M:%S")))
+            print("result", list[list.index(i)], datetime.datetime.fromtimestamp(int(os.path.getmtime(list[list.index(i)]))).strftime("%Y-%m-%d %H:%M:%S"))
 if __name__ == '__main__':
     rmFile(path)
