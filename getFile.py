@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+import datetime
 import os
 import sys
 import time
-from datetime import datetime, timedelta
 
 
 def getArgs():
@@ -33,10 +33,11 @@ def rmFile(path):
     list = getFile(path)
     print(list)
     recent_time = getRecentFile(path)
-    print(recent_time)
+    print( datetime.datetime.fromtimestamp(int(recent_time)))
+
     for i in list:
         if os.path.getmtime(list[list.index(i)]) - recent_time > time:
-            print("result", list.index(i), os.path.getmtime(list.index(i)))
+            print("result", list[list.index(i)], datetime.datetime.fromtimestamp(int(os.path.getmtime(list[list.index(i)]))))
 
 
 if __name__ == '__main__':
