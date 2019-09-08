@@ -37,4 +37,5 @@ def rmFile(path):
             print list.index(i), os.path.getmtime(list.index(i))
 
 if __name__ == '__main__':
+    getArgs()
     rmFile(path)
